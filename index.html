@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AQI PORTAL</title>
+    <link rel="icon" type="image/jpg" href="webtechprojectlogo.jpg" />
+    <style>
+      .header {
+        text-align: center;
+      }
+
+      .logo {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .website {
+        display: flex;
+        height: 800px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .left-boxes {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+      }
+
+      .left-top {
+        height: 600px;
+        background-color: rgb(218, 165, 32);
+        padding: 15px;
+        overflow-y: auto;
+      }
+
+      .left-bottom {
+        flex: 1;
+        background-color: peru;
+        padding: 15px;
+      }
+
+      .right-box {
+        width: 50%;
+        background-color: burlywood;
+        padding: 15px;
+      }
+
+
+.aqi-overlay {
+  position: absolute;
+  top: 300px;
+  left: 768px; 
+  width: 25%;
+  height: 400px;
+  background-color: rgba(233, 158, 93, 0.937);
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 200px;
+  border-radius: 10px;
+}
+
+
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <img src="logo.jpg" alt="IT'S A LOGO" class="logo" />
+      <h1>AQI PORTAL: A Simple AQI Checker</h1>
+    </div>
+
+    <div class="website">
+      <div class="left-boxes">
+        <!--this is for left TOP -->
+
+        <div class="left-top">
+          <h2 style="text-align: center; margin-bottom: 10px">
+            REGISTRATION FORM
+          </h2>
+          <form id="form" action="process.php" method="post">
+            <!--this is for USERNAME -->
+
+            <label for="USERname">User Name:</label>
+            <input type="text" id="USERname" name="USERname" />
+            <br />
+            <p id="validname" style="color: brown"></p>
+
+            <hr />
+
+            <!--this is for DOB -->
+
+            <label for="DOB">Date of Birth:</label>
+            <input type="date" id="DOB" name="DOB" placeholder="YYYY-MM-DD" />
+            <p id="validdob" style="color: brown"></p>
+            <hr />
+            <!--this is for GENDER -->
+            <label for="gender">Gender:</label><br />
+            <input type="radio" id="FEMALE" name="gender" value="FEMALE" />
+            <label for="FEMALE">FEMALE</label><br />
+            <input type="radio" id="MALE" name="gender" value="MALE" />
+            <label for="MALE">MALE</label>
+            <p id="validgender" style="color: brown"></p>
+            <hr />
+            <!--this is for COUNTRY -->
+
+            <label for="country">Select Country:</label>
+
+            <select
+              class="form-select"
+              autocomplete="off"
+              name="country"
+              id="country"
+            >
+              <option value="" disabled selected>country</option>
+              <option value="AS">American Samoa</option>
+              <option value="AD">Andorra</option>
+              <option value="AO">Angola</option>
+              <option value="BD">Bangladesh</option>
+              <option value="BB">Barbados</option>
+              <option value="BY">Belarus</option>
+              <option value="BE">Belgium</option>
+              <option value="BZ">Belize</option>
+              <option value="BJ">Benin</option>
+              <option value="BM">Bermuda</option>
+              <option value="BG">Bulgaria</option>
+              <option value="BI">Burundi</option>
+            </select>
+            <p id="validcountry" style="color: brown"></p>
+            <hr />
+
+            <!--this is for AQI -->
+
+            <label for="AQI"
+              >Opinions about AQI(<b style="color: brown">optional</b>):</label
+            >
+            <textarea
+              type="textarea"
+              id="AQI"
+              name="AQI"
+              rows="2"
+              cols="40"
+            ></textarea
+            ><br />
+            <!--<input type="message" id="AQI" name="AQI" />-->
+            <hr />
+            <!--this is for EMAIL -->
+
+            <label for="email">Email ID:</label>
+            <input type="text" id="email" name="email" />
+            <p id="validemail" style="color: brown"></p>
+            <hr />
+            <!--this is for PASSWORD -->
+
+            <label for="userpassword">password: </label>
+            <input type="password" id="userpassword" name="userpassword" />
+            <p id="validpass" style="color: brown"></p>
+            <hr />
+            <!--this is for CONFIRM PASSWORD -->
+
+            <label for="confirmpass">Confirm Password :</label>
+            <input type="password" id="confirmpass" name="confirmpass" />
+            <p id="validconfirmpass" style="color: brown"></p>
+            <hr />
+            <!--this is for BACKGROUND COLOR -->
+
+            <label for="color">Select Background Color:</label>
+            <input type="color" id="color" name="color" value="#000000" />
+            <p id="validcolor" style="color: brown"></p>
+            <hr />
+            <!--this is for CHECK BOX -->
+
+            <input type="checkbox" id="TERMS" name="TERMS" value="TERMS" />
+            <label for="TERMS"
+              >Terms & Conditions<a
+                href="https://www.w3schools.com/html/html_forms.asp"
+              >
+                read more
+              </a></label
+            >
+            <p id="validterms" style="color: brown"></p>
+            <br />
+
+            <input
+              type="submit"
+              name="submit"
+              value="submit"
+              style="text-align: right"
+              onclick="return validate()"
+            />
+          </form>
+        </div>
+
+        <!--LOG IN PART -->
+        <div class="left-bottom">
+          <h2 style="text-align: center; margin-bottom: 10px">LOGIN</h2>
+          <form id="Bottomform" action="loginprocess.php" method="post">
+            <!--this is for USERNAME -->
+            <label for="loginEMAIL">Email:</label>
+            <input type="text" id="loginEMAIL" name="email" />
+            <p id="loginValidname" style="color: brown"></p>
+
+            <!--this is for PASSWORD -->
+            <br />
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="userpassword" />
+            <p id="loginValidpass" style="color: brown"></p>
+
+            <br />
+            <input type="submit" name="loginSubmit" value="Login" />
+          </form>
+        </div>
+      </div>
+      <!--MAKING TABLE FOR AQI -->
+
+      <div class="right-box">
+        <h2 style="text-align: center; margin-bottom: 10px">
+          Air Quality Index (AQI)
+        </h2>
+         <div class="aqi-container"></div>
+        <table
+          border="5"
+          style="
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            text-align: center;
+          "
+        >
+          <thead>
+            <tr>
+              <th>CITY</th>
+              <th>COUNTRY</th>
+              <th>AQI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dhaka</td>
+              <td>Bangladesh</td>
+              <td>170</td>
+            </tr>
+            <tr>
+              <td>Beijing</td>
+              <td>China</td>
+              <td>300</td>
+            </tr>
+            <tr>
+              <td>Los Angeles</td>
+              <td>USA</td>
+              <td>120</td>
+            </tr>
+            <tr>
+              <td>London</td>
+              <td>UK</td>
+              <td>80</td>
+            </tr>
+            <tr>
+              <td>Tokyo</td>
+              <td>Japan</td>
+              <td>60</td>
+            </tr>
+            <tr>
+              <td>Cairo</td>
+              <td>Egypt</td>
+              <td>150</td>
+            </tr>
+            <tr>
+              <td>Moscow</td>
+              <td>Russia</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>Istanbul</td>
+              <td>Turkey</td>
+              <td>90</td>
+            </tr>
+            <tr>
+              <td>Bangkok</td>
+              <td>Thailand</td>
+              <td>130</td>
+            </tr>
+            <tr>
+              <td>New York</td>
+              <td>USA</td>
+              <td>110</td>
+            </tr>
+            <tr>
+              <td>Paris</td>
+              <td>France</td>
+              <td>95</td>
+            </tr>
+            <tr>
+              <td>Seoul</td>
+              <td>South Korea</td>
+              <td>70</td>
+            </tr>
+            <tr>
+              <td>Jakarta</td>
+              <td>Indonesia</td>
+              <td>210</td>
+            </tr>
+            <tr>
+              <td>Tehran</td>
+              <td>Iran</td>
+              <td>240</td>
+            </tr>
+            <tr>
+              <td>Nairobi</td>
+              <td>Kenya</td>
+              <td>85</td>
+            </tr>
+            <tr>
+              <td>Mexico City</td>
+              <td>Mexico</td>
+              <td>160</td>
+            </tr>
+            <tr>
+              <td>Lagos</td>
+              <td>Nigeria</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <td>Hanoi</td>
+              <td>Vietnam</td>
+              <td>140</td>
+            </tr>
+          </tbody>
+          
+          
+        </table>
+            <div class="aqi-overlay">
+             <p>Log in to see AQI</p>
+          
+             
+        </form>
+      </div>
+    </div>
+    <!--working on a script: validation-->
+  
+    <script>
+      function validateName() {
+        const name = document.getElementById("USERname").value.trim();
+        const nameError = document.getElementById("validname");
+
+        const regex = /^[A-Za-z\s]+$/;
+
+        if (name === "" || !regex.test(name) || name.length <= 2) {
+          nameError.innerText = "*Enter valid name with alphabets only!";
+          return false;
+        } else {
+          nameError.innerText = "";
+          return true;
+        }
+      }
+
+      function validateEmail() {
+        const email = document.getElementById("email").value.trim();
+        const emailError = document.getElementById("validemail");
+
+        const regex = /^[^@\s]+@(gmail\.com|yahoo\.com|hotmail\.com)$/;
+
+        if (email === "" || !regex.test(email)) {
+          emailError.innerText = "*Email format not valid!";
+          return false;
+        } else {
+          emailError.innerText = "";
+          return true;
+        }
+      }
+
+      function validateDOB() {
+        const dobInput = document.getElementById("DOB").value.trim();
+        const dobError = document.getElementById("validdob");
+
+        const birthDate = new Date(dobInput);
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+
+        if (!dobInput || isNaN(birthDate) || age < 18) {
+          dobError.innerText = "*Must be 18 years or older.";
+          return false;
+        } else {
+          dobError.innerText = "";
+          return true;
+        }
+      }
+
+      function validatePassword() {
+        const pass = document.getElementById("userpassword").value.trim();
+        const confirm = document.getElementById("confirmpass").value.trim();
+        const passError = document.getElementById("validpass");
+        const confirmError = document.getElementById("validconfirmpass");
+
+        const regex = /^[a-zA-Z0-9]{8}$/;
+
+        let valid = true;
+
+        if (!regex.test(pass)) {
+          passError.innerText = "*must be alphanumeric(8 characters).";
+          valid = false;
+        } else {
+          passError.innerText = "";
+        }
+
+        if (pass !== confirm) {
+          confirmError.innerText = "*Passwords do not match.";
+          valid = false;
+        } else {
+          confirmError.innerText = "";
+        }
+
+        return valid;
+      }
+
+      function validateGender() {
+        const genderError = document.getElementById("validgender");
+        const selected = document.querySelector('input[name="gender"]:checked');
+
+        if (!selected) {
+          genderError.innerText = "*Please select a gender.";
+          return false;
+        } else {
+          genderError.innerText = "";
+          return true;
+        }
+      }
+      function validateCountry() {
+        const country = document.getElementById("country").value;
+        const countryError = document.getElementById("validcountry");
+
+        if (!country) {
+          countryError.innerText = "*Please select your country.";
+          return false;
+        } else {
+          countryError.innerText = "";
+          return true;
+        }
+      }
+
+      function validateColor() {
+        const colorInput = document.getElementById("color");
+        const colorError = document.getElementById("validcolor");
+
+        if (colorInput.value === "#000000") {
+          colorError.innerText = "*Please choose a background color.";
+          return false;
+        } else {
+          colorError.innerText = "";
+          return true;
+        }
+      }
+
+      function validateTerms() {
+        const termsCheckbox = document.getElementById("TERMS");
+        const termsError = document.getElementById("validterms");
+
+        if (!termsCheckbox.checked) {
+          termsError.innerText = "*You must accept the Terms!";
+          return false;
+        } else {
+          termsError.innerText = "";
+          return true;
+        }
+      }
+
+      function validate() {
+        const nameValid = validateName();
+        const emailValid = validateEmail();
+        const dobValid = validateDOB();
+        const passValid = validatePassword();
+        const genderValid = validateGender();
+        const countryValid = validateCountry();
+        const colorValid = validateColor();
+        const termsValid = validateTerms();
+
+        return (
+          nameValid &&
+          emailValid &&
+          dobValid &&
+          passValid &&
+          genderValid &&
+          countryValid &&
+          colorValid &&
+          termsValid
+        );
+      }
+    </script>
+  </body>
+</html>
